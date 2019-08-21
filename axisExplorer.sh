@@ -79,7 +79,7 @@ function newScriptTemplate {
 	}
 function afficherAide {
 	#echo -e ""
-	echo -e $style_subtitle"Commandes:"
+	echo -e $style_subtitle"Aide/Commandes:"
 	echo -e $style_subsubtitle"Distantes:"
 	echo -e $style_subsubsubtitle_arbored"help:$style_text \t\tAffiche cette aide"
 	echo -e $style_subsubsubtitle_arbored"ls PATH:$style_text \t\tListe le contenu du dossier distant PATH"
@@ -88,7 +88,7 @@ function afficherAide {
 	echo -e $style_subsubsubtitle_arbored"pwd:$style_text \t\tShows the current working directory"
 	echo -e $style_subsubsubtitle_arbored"upload LFILE RFILEABSPATH XXX:$style_text uploads the local file LFILE to the host according to the absolute path with XXX rights (chmod)"
 	echo -e $style_subsubsubtitle_arbored"download RFILE LDEST:$style_text downloads the remote file RFILE and store it in LDEST folder or file"
-	echo -e $style_subsubsubtitle_arbored"rmlogs:$style_text \trerase logs. /var/logs/messages and /var/logs/messages.old"
+	echo -e $style_subsubsubtitle_arbored"rmlogs:$style_text \t\trerase logs. /var/logs/messages and /var/logs/messages.old"
 	echo -e $style_subsubtitle"Locales:"
 	echo -e $style_subsubsubtitle_arbored"lcd PATH:$style_text \t\tChange the local working directory to PATH"
 	echo -e $style_subsubsubtitle_arbored"lls:$style_text \t\tRuns ls on local machine"
@@ -193,7 +193,6 @@ function showInfos {
 	echo -e $style_subtitle"Port:$style_text $port"
 	echo -e $style_subtitle"Username:$style_text $user"
 	echo -e $style_subtitle"Password:$style_text $mdp"
-	echo -e ""
 
 	}
 function setParameters {
@@ -299,6 +298,7 @@ fi
 # MAIN PROGRAM:
 ######################################################################
 showInfos
+afficherAide
 prompt=$(formatPromt)
 
 # vars: cmd, params, path, file
@@ -494,13 +494,13 @@ done
 ######################################################################
 # END:
 ######################################################################
-if [ -f $temp_file ];then
-	rm -f "$temp_file" 2>&1 >/dev/null
-fi
 echo -e $style_subtitle"Program End:"
-echo -e $style_subsubtitle"Logs: $style_text Erasing..."
+echo -e $style_subsubtitle"Logs:$style_text Erasing..."
 eraseLogs
 echo -e $style_subsubtitle"Logs:$style_text Erased!...Bye!"${d213_styles["reset"]}
+if [ -f "$temp_file" ];then
+	rm -f "$temp_file" 2>&1 >/dev/null
+fi
 
 
-
+exit
